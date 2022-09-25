@@ -1,0 +1,32 @@
+syntax = 'proto3';
+// import "google/protobuf/any.proto";
+// import "google/protobuf/api.proto";
+// import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+// import "google/protobuf/field_mask.proto";
+// import "google/protobuf/source_context.proto";
+// import "google/protobuf/struct.proto";
+// import "google/protobuf/timestamp.proto";
+// import "google/protobuf/type.proto";
+import "google/protobuf/wrappers.proto";
+
+/* Task service API */
+service Taskapi {
+    // Add a new task and return its id
+    rpc addTask (google.protobuf.StringValue) returns (Task);
+    // Delete a task by id
+    rpc delTask(google.protobuf.UInt64Value) returns (Task);
+    // Edit an existing task (ignoring write conflicts)
+    rpc editTask(Task) returns (Task);
+    // List all tasks
+    rpc listTasks (google.protobuf.Empty) returns (Tasks);
+}
+
+message Task {
+    uint64 id = 1;
+    string description = 2;
+}
+
+message Tasks {
+    repeated Task pending = 1;
+}
