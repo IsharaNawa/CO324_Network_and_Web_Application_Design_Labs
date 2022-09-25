@@ -1,0 +1,38 @@
+syntax = 'proto3';
+import "google/protobuf/wrappers.proto";
+
+/* Task service API */
+
+service Taskapi {
+    // Add a new task and return its id
+    rpc addTask (google.protobuf.StringValue) returns (Task);
+    // Delete a task by id
+    rpc delTask(google.protobuf.UInt64Value) returns (Task);
+    //Edit an existing task considering the states
+    rpc editTask(Task) returns (Task);
+    // List all tasks in the given states
+    rpc listTasks (TaskQuery) returns (Tasks);
+}
+
+enum TaskState {
+    OPEN = 0; // may transition to ASSIGNED or CANCELLED.
+    ASSIGNED = 1; // may transition to PROGRESSING only.
+    PROGRESSING = 2; // may transition to DONE or CANCELLED.
+    DONE = 3; // terminal state.
+    CANCELLED = 4; // terminal state.
+}
+
+message Task {
+    uint64 id = 1;
+    string description = 2;
+    TaskState state = 3;
+}
+
+message Tasks {
+    repeated Task pending = 1;
+}
+
+// A set of task states to select when listing tasks
+message TaskQuery {
+    repeated TaskState selected = 1;
+}
