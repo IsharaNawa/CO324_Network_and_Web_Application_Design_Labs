@@ -1,0 +1,8 @@
+.pytest_cache
+venv
+src/__pycache__/
+test/__pycache__/
+test/test_sort_by_courses_registered/__pycache__/
+test/test_index_by_name/__pycache__/
+test/test_store_course_registrations/__pycache__/
+test/test_load_course_registrations/__pycache__/
