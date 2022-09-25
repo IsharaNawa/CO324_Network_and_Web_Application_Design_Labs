@@ -1,0 +1,32 @@
+syntax = 'proto3';
+/* Task service API */
+service Taskapi {
+    /* Add a new task and return the created task */
+    rpc addTask (TaskDesc) returns (Task);
+
+    /* Delete a task by id and return the deleted task*/
+    rpc delTask(Id) returns (Task);
+    
+    /* List all tasks */
+    rpc listTasks (Empty) returns (Tasks);
+}
+
+message TaskDesc {
+    string description = 1;
+}
+
+message Task {
+    int64 id = 1;
+    string description = 2;
+}
+
+message Id {
+    int64 id = 1;
+}
+
+message Tasks {
+    repeated Task tasks = 1;
+}
+
+message Empty {
+}
